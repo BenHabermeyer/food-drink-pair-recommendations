@@ -1,0 +1,45 @@
+.genres-container {
+  /* margin: 10px 0; */
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  /* border-bottom: 1px solid #ddd; */
+}
+
+.genres-container .genre {
+  flex: 1 0 20%;
+  margin: 5px 0;
+  padding: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.genres-container .genre:hover {
+  background-color: #ddd;
+}
+
+.movies-container .movies-header, .results-container .movie {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  height: 60px;
+  font-weight: 900;
+}
+
+.movie .title, .movies-header .header-lg {
+  font-size: 40px;
+  font-weight: 900;
+  flex: 1 0 50%;
+}
+
+.movies-header .header, .movie .rating, .movie .votes {
+  flex: 1 0 25%;
+}
+
+.resize {
+    width: 900px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
