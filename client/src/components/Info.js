@@ -9,12 +9,12 @@ export default class Info extends React.Component {
 		super(props);
 
 		this.state = {
-			selectedDecade: "",
-			decades: [],
-			genres: []
+			selectedStyle: "",
+			styles: [],
+			beers: []
 		};
 
-		this.submitDecade = this.submitDecade.bind(this);
+		this.submitStyle = this.submitStyle.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
@@ -25,12 +25,12 @@ export default class Info extends React.Component {
 
 	handleChange(e) {
 		this.setState({
-			selectedDecade: e.target.value
+			selectedStyle: e.target.value
 		});
 	}
 
 	/* ---- Q3b (Best Genres) ---- */
-	submitDecade() {
+	submitStyle() {
 		
 	}
 
@@ -42,25 +42,25 @@ export default class Info extends React.Component {
 
 				<div className="container source-container">
 			      <div className="jumbotron">
-			        <div className="h5">Best Genres</div>
+			        <div className="h5">Beer Styles</div>
 
 			        <div className="years-container">
 			          <div className="dropdown-container">
-			            <select value={this.state.selectedDecade} onChange={this.handleChange} className="dropdown" id="decadesDropdown">
-			            	{this.state.decades}
+			            <select value={this.state.selectedStyle} onChange={this.handleChange} className="dropdown" id="stylesDropdown">
+			            	{this.state.styles}
 			            </select>
-			            <button className="submit-btn" id="decadesSubmitBtn" onClick={this.submitDecade}>Submit</button>
+			            <button className="submit-btn" id="stylesSubmitBtn" onClick={this.submitStyle}>Submit</button>
 			          </div>
 			        </div>
 			      </div>
 			      <div className="jumbotron">
 			        <div className="movies-container">
 			          <div className="movie">
-			            <div className="header"><strong>Genre</strong></div>
+			            <div className="header"><strong>Beer</strong></div>
 			            <div className="header"><strong>Average Rating</strong></div>
 			          </div>
 			          <div className="movies-container" id="results">
-			            {this.state.genres}
+			            {this.state.beers}
 			          </div>
 			        </div>
 			      </div>
