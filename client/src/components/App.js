@@ -7,6 +7,7 @@ import {
 import Home from './Home';
 import Pair from './Pair';
 import Source from './Source';
+import Map from './Map';
 
 export default class App extends React.Component {
 
@@ -39,6 +40,12 @@ export default class App extends React.Component {
 							path="/source"
 							render={() => (
 								<Source />
+							)}
+						/>
+						<Route
+							path="/map"
+							render={() => (
+								<Map />
 							)}
 						/>
 					</Switch>
