@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Home from './Home';
 import Pair from './Pair';
-import Source from './Source';
+import Info from './Info';
 import Map from './Map';
 
 export default class App extends React.Component {
@@ -37,9 +37,9 @@ export default class App extends React.Component {
 							)}
 						/>
 						<Route
-							path="/source"
+							path="/info"
 							render={() => (
-								<Source />
+								<Info />
 							)}
 						/>
 						<Route
