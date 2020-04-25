@@ -58,13 +58,17 @@ async function getDrinkPair(req, res) {
       connection = await oracledb.getConnection(dbConfig);
       let result = await connection.execute(
         // The statement to execute
-      `SELECT food, beer_style, rating
-      FROM beer_pair
-      WHERE food = :bnbv`,
+      `(SELECT FOOD, VARIETY AS TYPE, RATING
+        FROM WINE_PAIR
+        WHERE FOOD = :bnbv)
+        UNION
+        (SELECT FOOD, BEER_STYLE AS TYPE, RATING
+        FROM BEER_PAIR
+        WHERE FOOD = :bnbv) ORDER BY RATING DESC`,
       // The "bind value" for the bind variable ":bnbv"
       [foodname],
       {
-        maxRows: 5,
+        maxRows: 10,
         outFormat: oracledb.OUT_FORMAT_OBJECT
       });
 
