@@ -23,11 +23,34 @@ async function getStateData(req, res) {
       connection = await oracledb.getConnection(dbConfig);
       let result = await connection.execute(
         // The statement to execute
-      `SELECT DISTINCT w.winery AS winery, AVG(r.points) AS rating
-      FROM wine_origin w JOIN wine_review r ON w.title=r.title
+      `WITH 
+        avgr AS (
+            SELECT DISTINCT r.title AS title, AVG(r.points) AS avgrating
+            FROM wine_review r
+            GROUP BY r.title
+        ),
+        bestwine AS (
+            SELECT DISTINCT w.winery AS winery, MIN(w.title) AS title
+            FROM wine_origin w JOIN avgr ON w.title = avgr.title
+            WHERE w.province = :bnbv
+            GROUP BY w.winery
+            HAVING MAX(avgr.avgrating) >= ALL (
+                SELECT avgr.avgrating
+                FROM wine_origin w2 JOIN avgr ON w2.title = avgr.title
+                WHERE w2.winery = w.winery
+            )
+        ),
+        winery_rating AS (
+            SELECT DISTINCT w.winery AS winery, AVG(r.points) AS rating
+            FROM wine_origin w JOIN wine_review r ON w.title=r.title 
+            WHERE w.province = :bnbv
+            GROUP BY w.winery
+        )
+      SELECT DISTINCT w.winery AS winery, r.rating AS rating, b.title AS title
+      FROM wine_origin w JOIN bestwine b ON w.winery = b.winery AND w.title=b.title 
+          JOIN winery_rating r ON w.winery=r.winery
       WHERE w.province = :bnbv
-      GROUP BY w.winery
-      ORDER BY AVG(r.points) DESC`,
+      ORDER BY r.rating DESC`,
       // The "bind value" for the bind variable ":bnbv"
       [statename],
       {

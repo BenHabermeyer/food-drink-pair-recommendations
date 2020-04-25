@@ -116,7 +116,7 @@ export default class MapUS extends React.Component {
     }).then(decList => {
       console.log(decList); //displays your JSON object in the console
       let decDivs = decList.map((dec, i) => 
-        <BestGenreRow wineryname={dec.WINERY} rating={dec.RATING}/>
+        <BestGenreRow name={dec.WINERY} rating={dec.RATING} best={dec.TITLE}/>
       );
 
       this.setState({
@@ -145,6 +145,7 @@ export default class MapUS extends React.Component {
                 <div className="movie">
                   <div className="header"><strong>Winery</strong></div>
                   <div className="header"><strong>Average Wine Rating</strong></div>
+                  <div className="header"><strong>Best Wine</strong></div>
                 </div>
                 <div className="movies-container" id="results">
                   {this.state.winery}

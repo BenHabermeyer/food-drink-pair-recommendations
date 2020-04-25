@@ -9,9 +9,9 @@ export default class BestGenreRow extends React.Component {
 	render() {
 		return (
 			<div className="movieResults">
-				<div className="genre">{this.props.wineryname}</div>
-				<div className="rating">{this.props.statename}</div>
-				<div className="genre">{this.props.rating}</div>
+				<div className="genre">{this.props.name}</div>
+				<div className="movie">{this.props.rating}</div>
+				<div className="genre">{this.props.best}</div>
 			</div>
 		);
 	}
