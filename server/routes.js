@@ -15,6 +15,7 @@ const dbConfig = require('./dbconfig.js');
 /* -------------------------------------------------- */
 
 //req is input, res is output
+//for an input state, find 10 brew/wineries and their best wine/beer, ordered by average review score desc, with best beer/wine
 async function getStateData(req, res) {
   statename = req.params.stateName;
     let connection;
@@ -22,13 +23,15 @@ async function getStateData(req, res) {
       connection = await oracledb.getConnection(dbConfig);
       let result = await connection.execute(
         // The statement to execute
-      `SELECT w.winery AS winery, w.province AS state
-      FROM wine_origin w
-      WHERE w.province = :bnbv`,
+      `SELECT DISTINCT w.winery AS winery, AVG(r.points) AS rating
+      FROM wine_origin w JOIN wine_review r ON w.title=r.title
+      WHERE w.province = :bnbv
+      GROUP BY w.winery
+      ORDER BY AVG(r.points) DESC`,
       // The "bind value" for the bind variable ":bnbv"
-      ["Virginia"],
+      [statename],
       {
-        maxRows: 3,
+        maxRows: 10,
         outFormat: oracledb.OUT_FORMAT_OBJECT
       });
 

@@ -9,7 +9,7 @@ export default class MapUS extends React.Component {
     super(props);
 
     this.state = {
-      selectedState: "Virginia",
+      selectedState: "Select A State",
       stateMap: new Map(),
       stateFill: {},
       winery: []
@@ -82,11 +82,12 @@ export default class MapUS extends React.Component {
     });
   }
 
+  //what oappens with the onclock method
   mapHandler = (event) => {
-    var statename = event.target.dataset.name
-    //this.updateCurrentState(statename)
-    this.submitStateName()
-    //this.updateCurrentColor(statename)
+    var statename = new Promise(function(resolve, reject) {
+      resolve(event.target.dataset.name)
+    })
+    statename.then(this.updateCurrentState).then(this.submitStateName)
   }
 
   updateCurrentState = (statename) => {
@@ -95,11 +96,14 @@ export default class MapUS extends React.Component {
     });
   }
 
+  //to do
   updateCurrentColor = (statename) => {
     this.setState({
       stateFill: {statename: {fill: "navy"}}
     });
   }
+
+
 
   submitStateName() {
     fetch("http://localhost:8081/map/" + this.state.selectedState,
@@ -112,7 +116,7 @@ export default class MapUS extends React.Component {
     }).then(decList => {
       console.log(decList); //displays your JSON object in the console
       let decDivs = decList.map((dec, i) => 
-        <BestGenreRow wineryname={dec.WINERY} statename={dec.STATE} />
+        <BestGenreRow wineryname={dec.WINERY} rating={dec.RATING}/>
       );
 
       this.setState({
@@ -129,16 +133,18 @@ export default class MapUS extends React.Component {
 
         <div className="container source-container">
             <div className="jumbotron">
-              <div className="h1" align="center">{this.state.selectedState}</div>
+              <div className="h1" align="center">{this.state.selectedState}
+              </div>
               <div className="years-container">
                 <USAMap customize={this.state.stateFill} onClick={this.mapHandler} s/>
               </div>
             </div>
             <div className="jumbotron">
+              <div className="h3" align="center">Top 10 Wineries/Breweries In Your State</div>
               <div className="movies-container">
                 <div className="movie">
                   <div className="header"><strong>Winery</strong></div>
-                  <div className="header"><strong>State</strong></div>
+                  <div className="header"><strong>Average Wine Rating</strong></div>
                 </div>
                 <div className="movies-container" id="results">
                   {this.state.winery}
