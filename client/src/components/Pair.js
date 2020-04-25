@@ -45,15 +45,15 @@ export default class Pair extends React.Component {
       // Map each movieObj in movieList to an HTML element:
       // A button which triggers the showMovies function for each genre.
       let pairDivs = pairList.map((pairObj, i) =>
-      	<RecommendationsRow title={pairObj.FOOD} beerwine={pairObj.BEER_STYLE} rating={pairObj.RATING}/>
+      	<RecommendationsRow title={pairObj.FOOD} beerwine={pairObj.TYPE} rating={pairObj.RATING}/>
       // <RecommendationsRow title = {pairObj.title} id={pairObj.beerwine} rating = {pairObj.rating}/>
         );
-      console.log(pairDivs);
+
       // Set the state of the genres list to the value returned by the HTTP response from the server.
       this.setState({
         recPairs: pairDivs
       })
-      console.log(this.state.recPairs);
+
     });
 	}
 
