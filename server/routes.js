@@ -49,7 +49,44 @@ async function getStateData(req, res) {
     }
 }
 
+//req is input, res is output
+async function getDrinkPair(req, res) {
+  console.log("entered");
+  foodname = req.params.foodName;
+    let connection;
+    try {
+      connection = await oracledb.getConnection(dbConfig);
+      let result = await connection.execute(
+        // The statement to execute
+      `SELECT food, beer_style, rating
+      FROM beer_pair
+      WHERE food = :bnbv`,
+      // The "bind value" for the bind variable ":bnbv"
+      [foodname],
+      {
+        maxRows: 5,
+        outFormat: oracledb.OUT_FORMAT_OBJECT
+      });
+
+      console.log(result.metaData); 
+      console.log(result.rows);
+
+      res.json(result.rows) //REALLY IMPORTANT
+    } catch (err) {
+      console.error(err);
+    } finally {
+      if (connection) {
+        try {
+          await connection.release();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+}
+
 // The exported functions, which can be accessed in index.js.
 module.exports = {
 	getStateData: getStateData,
+  getDrinkPair: getDrinkPair
 }
