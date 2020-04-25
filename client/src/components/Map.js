@@ -114,9 +114,11 @@ export default class MapUS extends React.Component {
       let decDivs = decList.map((dec, i) => 
         <BestGenreRow wineryname={dec.WINERY} statename={dec.STATE} />
       );
+
       this.setState({
         winery: decDivs
       });
+      console.log(this.state.winery)
     });
   }
  
