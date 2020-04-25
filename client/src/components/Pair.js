@@ -13,7 +13,7 @@ export default class Pair extends React.Component {
 		this.state = {
 			foodName: "",
 			recPairs: []
-		}
+		};
 
 		this.handlefoodNameChange = this.handlefoodNameChange.bind(this);
 		this.submitFood = this.submitFood.bind(this);
@@ -25,11 +25,12 @@ export default class Pair extends React.Component {
 		});
 	}
 
+
 	/* ---- Q2 (Recommendations) ---- */
 	// Hint: Name of movie submitted is contained in `this.state.foodName`.
 	submitFood() {
 		   // Send an HTTP request to the server.
-    fetch("http://localhost:8081/recommendations/" + this.state.foodName,
+    fetch("http://localhost:8081/pair/" + this.state.foodName,
     {
       method: 'GET' // The type of HTTP request.
     }).then(res => {
@@ -44,18 +45,18 @@ export default class Pair extends React.Component {
       // Map each movieObj in movieList to an HTML element:
       // A button which triggers the showMovies function for each genre.
       let pairDivs = pairList.map((pairObj, i) =>
-      <RecommendationsRow title = {pairObj.title} id={pairObj.beerwine} rating = {pairObj.rating}/>
+      	<RecommendationsRow title={pairObj.FOOD} beerwine={pairObj.BEER_STYLE} rating={pairObj.RATING}/>
+      // <RecommendationsRow title = {pairObj.title} id={pairObj.beerwine} rating = {pairObj.rating}/>
         );
-
+      console.log(pairDivs);
       // Set the state of the genres list to the value returned by the HTTP response from the server.
       this.setState({
         recPairs: pairDivs
-      });
-    }, err => {
-      // Print the error if there is one.
-      console.log(err);
+      })
+      console.log(this.state.recPairs);
     });
 	}
+
 
 
 	render() {
@@ -78,9 +79,7 @@ export default class Pair extends React.Component {
 			    				<div className="header"><strong>Food</strong></div>
 			    				<div className="header"><strong>Name of Beer/Wine</strong></div>
 					            <div className="header"><strong>Rating</strong></div>
-											{
-					            //<div className="header"><strong>Vote Count</strong></div>
-										}
+
 			    			</div>
 			    		</div>
 			    		<div className="results-container" id="results">
