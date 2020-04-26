@@ -77,22 +77,70 @@ async function getStateData(req, res) {
 
 //req is input, res is output
 async function getDrinkPair(req, res) {
-  console.log("entered");
   foodname = req.params.foodName;
     let connection;
     try {
       connection = await oracledb.getConnection(dbConfig);
       let result = await connection.execute(
         // The statement to execute
-      `(SELECT FOOD, VARIETY AS TYPE, RATING
-        FROM WINE_PAIR
+      `WITH wine AS (SELECT p.VARIETY AS TYPE, o.TITLE AS NAME, p.RATING, r.POINTS AS DRINK_RATING
+        FROM WINE_ORIGIN o JOIN WINE_PAIR p ON p.VARIETY = o.VARIETY
+        JOIN WINE_REVIEW r ON r.TITLE = o.TITLE
+        WHERE FOOD = :bnbv),
+        beer AS (SELECT p.BEER_STYLE AS TYPE, o.BEER_NAME AS NAME, p.RATING, r.RATING AS DRINK_RATING
+        FROM BEER_ORIGIN o JOIN BEER_PAIR p ON p.BEER_STYLE = o.BEER_STYLE
+        JOIN BEER_REVIEW r ON r.BEER_NAME = o.BEER_NAME
         WHERE FOOD = :bnbv)
+        (SELECT w.TYPE, MAX(w.NAME) AS NAME, w.RATING, w.DRINK_RATING 
+        FROM wine w 
+        JOIN (SELECT TYPE, MAX(DRINK_RATING) AS BEST FROM wine GROUP BY TYPE) r 
+        ON w.TYPE = r.TYPE AND w.DRINK_RATING = r.BEST GROUP BY w.TYPE, w.RATING, w.DRINK_RATING)
         UNION
-        (SELECT FOOD, BEER_STYLE AS TYPE, RATING
-        FROM BEER_PAIR
-        WHERE FOOD = :bnbv) ORDER BY RATING DESC`,
+        (SELECT b.TYPE, MAX(b.NAME) AS NAME, b.RATING, b.DRINK_RATING 
+        FROM beer b
+        JOIN (SELECT TYPE, MAX(DRINK_RATING) AS BEST FROM beer GROUP BY TYPE) r 
+        ON b.TYPE = r.TYPE AND b.DRINK_RATING = r.BEST GROUP BY b.TYPE, b.RATING, b.DRINK_RATING )
+        ORDER BY RATING DESC`,
       // The "bind value" for the bind variable ":bnbv"
       [foodname],
+      {
+        maxRows: 10,
+        outFormat: oracledb.OUT_FORMAT_OBJECT
+      });
+
+      console.log(result.metaData); 
+      console.log(result.rows);
+
+      res.json(result.rows) //REALLY IMPORTANT
+    } catch (err) {
+      console.error(err);
+    } finally {
+      if (connection) {
+        try {
+          await connection.release();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+}
+
+//req is input, res is output
+async function getFoodPair(req, res) {
+  drinktype = req.params.drinkType;
+    let connection;
+    try {
+      connection = await oracledb.getConnection(dbConfig);
+      let result = await connection.execute(
+        // The statement to execute
+        `SELECT DISTINCT FOOD, RATING
+        FROM WINE_PAIR WHERE VARIETY = :bnbv
+        UNION
+        SELECT DISTINCT FOOD, RATING
+        FROM BEER_PAIR WHERE BEER_STYLE = :bnbv
+        ORDER BY RATING DESC`,
+      // The "bind value" for the bind variable ":bnbv"
+      [drinktype],
       {
         maxRows: 10,
         outFormat: oracledb.OUT_FORMAT_OBJECT
@@ -118,5 +166,6 @@ async function getDrinkPair(req, res) {
 // The exported functions, which can be accessed in index.js.
 module.exports = {
 	getStateData: getStateData,
-  getDrinkPair: getDrinkPair
+  getDrinkPair: getDrinkPair,
+  getFoodPair: getFoodPair
 }
