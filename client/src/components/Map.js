@@ -13,7 +13,8 @@ export default class MapUS extends React.Component {
       selectedState: "Select A State",
       stateMap: new Map(),
       stateFill: {},
-      winery: []
+      winery: [],
+      button: "wine"
     };
 
     this.mapHandler = this.mapHandler.bind(this);
@@ -83,6 +84,13 @@ export default class MapUS extends React.Component {
     });
   }
 
+  //to do
+  updateCurrentColor = (statename) => {
+    this.setState({
+      stateFill: {statename: {fill: "navy"}}
+    });
+  }
+
   //what oappens with the onclock method
   mapHandler = (event) => {
     var statename = new Promise(function(resolve, reject) {
@@ -97,17 +105,21 @@ export default class MapUS extends React.Component {
     });
   }
 
-  //to do
-  updateCurrentColor = (statename) => {
+  buttonHandler = (value) => {
+    var valuename = new Promise(function(resolve, reject) {
+      resolve(value)
+    })
+    valuename.then(this.updateCurrentButton).then(this.submitStateName)
+  }
+
+  updateCurrentButton = (value) => {
     this.setState({
-      stateFill: {statename: {fill: "navy"}}
+      button: value
     });
   }
 
-
-
   submitStateName() {
-    fetch("http://localhost:8081/map/" + this.state.selectedState,
+    fetch("http://localhost:8081/map/" + this.state.selectedState + "_" + this.state.button,
     {
       method: "GET"
     }).then(res => {
@@ -142,7 +154,7 @@ export default class MapUS extends React.Component {
             </div>
             <div className="jumbotron">
               <div className="h3" align="center">Top 10 Wineries/Breweries In Your State</div>
-              <RadioGroup onChange={ this.onChange } value='wine' horizontal>
+              <RadioGroup onChange={ this.buttonHandler } value={this.state.button} horizontal>
                 <RadioButton value="wine" iconSize={20} iconInnerSize={10}>
                   Wine
                 </RadioButton>
@@ -152,9 +164,9 @@ export default class MapUS extends React.Component {
               </RadioGroup>
               <div className="movies-container">
                 <div className="movie">
-                  <div className="header"><strong>Winery</strong></div>
-                  <div className="header"><strong>Average Wine Rating</strong></div>
-                  <div className="header"><strong>Best Wine</strong></div>
+                  <div className="header"><strong>Winery/Brewery Name</strong></div>
+                  <div className="header"><strong>Average Wine/Beer Rating</strong></div>
+                  <div className="header"><strong>Best Wine/Beer</strong></div>
                 </div>
                 <div className="movies-container" id="results">
                   {this.state.winery}

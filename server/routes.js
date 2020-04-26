@@ -46,52 +46,99 @@ init();
 
 //req is input, res is output
 //for an input state, find 10 brew/wineries and their best wine/beer, ordered by average review score desc, with best beer/wine
-async function getStateData(req, res) {
-  statename = req.params.stateName;
+async function getStateDataWine(req, res) {
+  var fullname = req.params.stateName;
+  var splitname = fullname.split("_");
+  var statename = splitname[0];
+  var beverage = splitname[1];
     let connection;
     try {
       connection = await oracledb.getConnection();
-      let result = await connection.execute(
-        // The statement to execute
-      `WITH 
-        avgr AS (
-            SELECT DISTINCT r.title AS title, AVG(r.points) AS avgrating
-            FROM wine_review r
-            GROUP BY r.title
-        ),
-        bestwine AS (
-            SELECT DISTINCT w.winery AS winery, MIN(w.title) AS title
-            FROM wine_origin w JOIN avgr ON w.title = avgr.title
-            WHERE w.province = :bnbv
-            GROUP BY w.winery
-            HAVING MAX(avgr.avgrating) >= ALL (
-                SELECT avgr.avgrating
-                FROM wine_origin w2 JOIN avgr ON w2.title = avgr.title
-                WHERE w2.winery = w.winery
-            )
-        ),
-        winery_rating AS (
-            SELECT DISTINCT w.winery AS winery, AVG(r.points) AS rating
-            FROM wine_origin w JOIN wine_review r ON w.title=r.title 
-            WHERE w.province = :bnbv
-            GROUP BY w.winery
-        )
-      SELECT DISTINCT w.winery AS winery, r.rating AS rating, b.title AS title
-      FROM wine_origin w JOIN bestwine b ON w.winery = b.winery AND w.title=b.title 
-          JOIN winery_rating r ON w.winery=r.winery
-      WHERE w.province = :bnbv
-      ORDER BY r.rating DESC`,
-      // The "bind value" for the bind variable ":bnbv"
-      [statename],
-      {
-        maxRows: 10,
-        outFormat: oracledb.OUT_FORMAT_OBJECT
-      });
+      if (beverage === 'wine') {
+        let result = await connection.execute(
+          // The statement to execute
+        `WITH 
+          avgr AS (
+              SELECT DISTINCT r.title AS title, AVG(r.points) AS avgrating
+              FROM wine_review r
+              GROUP BY r.title
+          ),
+          bestwine AS (
+              SELECT DISTINCT w.winery AS winery, MIN(w.title) AS title
+              FROM wine_origin w JOIN avgr ON w.title = avgr.title
+              WHERE w.province = :bnbv
+              GROUP BY w.winery
+              HAVING MAX(avgr.avgrating) >= ALL (
+                  SELECT avgr.avgrating
+                  FROM wine_origin w2 JOIN avgr ON w2.title = avgr.title
+                  WHERE w2.winery = w.winery
+              )
+          ),
+          winery_rating AS (
+              SELECT DISTINCT w.winery AS winery, AVG(r.points) AS rating
+              FROM wine_origin w JOIN wine_review r ON w.title=r.title 
+              WHERE w.province = :bnbv
+              GROUP BY w.winery
+          )
+        SELECT DISTINCT w.winery AS winery, ROUND(r.rating,2) AS rating, b.title AS title
+        FROM wine_origin w JOIN bestwine b ON w.winery = b.winery AND w.title=b.title 
+            JOIN winery_rating r ON w.winery=r.winery
+        WHERE w.province = :bnbv
+        ORDER BY ROUND(r.rating,2) DESC`,
+        // The "bind value" for the bind variable ":bnbv"
+        [statename],
+        {
+          maxRows: 10,
+          outFormat: oracledb.OUT_FORMAT_OBJECT
+        });  
 
-      console.log(result.metaData); 
-      console.log(result.rows);
+        console.log(result.metaData); 
+        console.log(result.rows);
 
-      res.json(result.rows) //REALLY IMPORTANT
+        res.json(result.rows) //REALLY IMPORTANT
+      } else if (beverage === 'beer') {
+        let result = await connection.execute(
+          // The statement to execute
+        `WITH 
+          avgr AS (
+              SELECT DISTINCT r.beer_name AS title, AVG(r.rating) AS avgrating
+              FROM beer_review r
+              GROUP BY r.beer_name
+          ),
+          bestbeer AS (
+              SELECT DISTINCT w.brewery_name AS brewery_name, MIN(w.beer_name) AS title
+              FROM beer_origin w JOIN avgr ON w.beer_name = avgr.title
+              WHERE w.province = :bnbv
+              GROUP BY w.brewery_name
+              HAVING MAX(avgr.avgrating) >= ALL (
+                  SELECT avgr.avgrating
+                  FROM beer_origin w2 JOIN avgr ON w2.beer_name = avgr.title
+                  WHERE w2.brewery_name = w.brewery_name
+              )
+          ),
+          brewery_rating AS (
+              SELECT DISTINCT w.brewery_name AS brewery_name, AVG(r.rating) AS rating
+              FROM beer_origin w JOIN beer_review r ON w.beer_name=r.beer_name 
+              WHERE w.province = :bnbv
+              GROUP BY w.brewery_name
+          )
+        SELECT DISTINCT w.brewery_name AS winery, ROUND(r.rating,2) AS rating, b.title AS title
+        FROM beer_origin w JOIN bestbeer b ON w.brewery_name = b.brewery_name AND w.beer_name=b.title 
+            JOIN brewery_rating r ON w.brewery_name=r.brewery_name
+        WHERE w.province = :bnbv
+        ORDER BY ROUND(r.rating,2) DESC`,
+        // The "bind value" for the bind variable ":bnbv"
+        [statename],
+        {
+          maxRows: 10,
+          outFormat: oracledb.OUT_FORMAT_OBJECT
+        });  
+
+        console.log(result.metaData); 
+        console.log(result.rows);
+
+        res.json(result.rows) //REALLY IMPORTANT  
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -195,7 +242,7 @@ async function getFoodPair(req, res) {
 
 // The exported functions, which can be accessed in index.js.
 module.exports = {
-	getStateData: getStateData,
+	getStateData: getStateDataWine,
   getDrinkPair: getDrinkPair,
   getFoodPair: getFoodPair
 }
