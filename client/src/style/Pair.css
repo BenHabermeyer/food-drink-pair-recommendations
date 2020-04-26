@@ -1,16 +1,31 @@
 .header-container, .results-container {
   display: flex;
   flex-flow: column wrap;
+  align-items: stretch;
   /* margin-top: 10px; */
 }
 
 .header-container .headers, .results-container .movieResults {
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
-  height: 40px;
+  align-items: stretch;
+  max-height: 80px;
 }
 
-.movieResults .title, .movieResults .id, .movieResults .rating, .movieResults .votes, .headers .header {
+.movieResults .drink_rating, .movieResults .rating, .movieResults .pair_rating, .headers .header {
+  flex: 1 0 8%;
+}
+
+.movieResults .type, .headers .typeHeader {
+  flex: 1 0 15%;
+}
+
+.movieResults .name, .headers .nameHeader {
   flex: 1 0 25%;
+  flex-grow: 4;
+}
+
+.movieResults .foodRec, .headers .recHeader {
+  flex: 1 0 25%;
+  height: 40px;
 }
