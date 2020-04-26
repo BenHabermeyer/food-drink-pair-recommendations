@@ -3,6 +3,7 @@ import '../style/Map.CSS';
 import USAMap from "react-usa-map";
 import PageNavbar from './PageNavbar';
 import BestGenreRow from './BestGenreRow';
+import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
 export default class MapUS extends React.Component {
   constructor(props) {
@@ -141,6 +142,14 @@ export default class MapUS extends React.Component {
             </div>
             <div className="jumbotron">
               <div className="h3" align="center">Top 10 Wineries/Breweries In Your State</div>
+              <RadioGroup onChange={ this.onChange } value='wine' horizontal>
+                <RadioButton value="wine" iconSize={20} iconInnerSize={10}>
+                  Wine
+                </RadioButton>
+                <RadioButton value="beer" iconSize={20} iconInnerSize={10}>
+                  Beer
+                </RadioButton>
+              </RadioGroup>
               <div className="movies-container">
                 <div className="movie">
                   <div className="header"><strong>Winery</strong></div>
