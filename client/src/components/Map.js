@@ -22,6 +22,7 @@ export default class MapUS extends React.Component {
     this.mapHandler = this.mapHandler.bind(this);
     this.submitStateName = this.submitStateName.bind(this);
     this.submitStateStats = this.submitStateStats.bind(this);
+    this.updateCurrentColor = this.updateCurrentColor.bind(this);
   }
 
   componentDidMount() {
@@ -89,8 +90,10 @@ export default class MapUS extends React.Component {
 
   //to do
   updateCurrentColor = (statename) => {
+    console.log(this.statename)
+    const myvalue = statename.target.value
     this.setState({
-      stateFill: {statename: {fill: "navy"}}
+      stateFill: {myvalue: {fill: "navy"}}
     });
   }
 
@@ -103,7 +106,11 @@ export default class MapUS extends React.Component {
   }
 
   updateCurrentState = (statename) => {
+    var obj = {}
+    var temp = {fill: "navy"}
+    obj[statename] = temp
     this.setState({
+      stateFill: obj,
       selectedState: this.state.stateMap.get(statename)
     });
   }
@@ -199,7 +206,7 @@ export default class MapUS extends React.Component {
             </div>
             <div className="jumbotron">
               <div className="h3" align="center">Statistics About Beverage Industry in State</div>
-              <div className="movies-container" >
+              <div className="movies-container">
                 <div className="movie">
                   <div className="header"><strong>Wineries</strong></div>
                   <div className="header"><strong>Wines Produced</strong></div>
