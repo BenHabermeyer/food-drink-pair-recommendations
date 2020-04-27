@@ -16,11 +16,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 /* ---- (map) ---- */
 // The route localhost:8081/genres is registered to the function
-app.get('/map/:stateName', routes.getStateData);
+app.get('/map/:stateName', routes.getStateDataWine);
 
 app.get('/pair/:foodName', routes.getDrinkPair);
 
 app.get('/drinkpair/:drinkType', routes.getFoodPair);
+
+app.get('/mapstats/:stateName', routes.getStateStats);
 
 app.listen(8081, () => {
 	console.log(`Server listening on PORT 8081`);

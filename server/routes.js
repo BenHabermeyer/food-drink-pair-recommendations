@@ -240,9 +240,71 @@ async function getFoodPair(req, res) {
     }
 }
 
+//returns statistics about the state's wine/beer
+async function getStateStats(req, res) {
+  var statename = req.params.stateName;
+    let connection;
+    try {
+      connection = await oracledb.getConnection();
+      let result = await connection.execute(
+      // The statement to execute
+      `WITH cte1 as (
+        SELECT b.beer_style as beer_style, COUNT(*) AS num
+        FROM beer_origin b 
+        where b.province=:bnbv
+        GROUP BY b.beer_style
+      ), highbeer as (
+        SELECT MIN(cte1.beer_style) as beer_style
+        FROM cte1 
+        WHERE cte1.num >= ALL (
+            SELECT num from cte1)
+      ), cte2 as (
+        SELECT b.variety as variety, COUNT(*) AS num
+        FROM wine_origin b 
+        where b.province=:bnbv
+        GROUP BY b.variety
+      ), highwine as (
+        SELECT MIN(cte2.variety) as variety
+        FROM cte2
+        WHERE cte2.num >= ALL (
+            SELECT num from cte2)
+      ), aggregates as (
+        SELECT COUNT(DISTINCT b.brewery_name) as nbreweries, 
+        COUNT(DISTINCT b.beer_name) as nbeers, 
+        COUNT(DISTINCT w.winery) as nwineries,
+        COUNT(DISTINCT w.title) as nwines
+        FROM beer_origin b JOIN wine_origin w ON b.province=w.province
+        WHERE b.province=:bnbv
+      ) 
+      SELECT a.nwineries, a.nwines, hw.variety, a.nbreweries, a.nbeers, hb.beer_style
+      FROM aggregates a, highbeer hb, highwine hw`,
+      // The "bind value" for the bind variable ":bnbv"
+      [statename],
+      {
+        outFormat: oracledb.OUT_FORMAT_OBJECT
+      });
+
+      console.log(result.metaData); 
+      console.log(result.rows);
+
+      res.json(result.rows) //REALLY IMPORTANT
+    } catch (err) {
+      console.error(err);
+    } finally {
+      if (connection) {
+        try {
+          await connection.release();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+}
+
 // The exported functions, which can be accessed in index.js.
 module.exports = {
-	getStateData: getStateDataWine,
+	getStateDataWine: getStateDataWine,
   getDrinkPair: getDrinkPair,
-  getFoodPair: getFoodPair
+  getFoodPair: getFoodPair,
+  getStateStats: getStateStats
 }

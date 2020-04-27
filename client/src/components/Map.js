@@ -3,6 +3,7 @@ import '../style/Map.CSS';
 import USAMap from "react-usa-map";
 import PageNavbar from './PageNavbar';
 import BestGenreRow from './BestGenreRow';
+import StatsRow from './StatsRow';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
 export default class MapUS extends React.Component {
@@ -12,13 +13,15 @@ export default class MapUS extends React.Component {
     this.state = {
       selectedState: "Select A State",
       stateMap: new Map(),
-      stateFill: {},
       winery: [],
-      button: "wine"
+      button: "wine",
+      stats: [],
+      stateFill: {}
     };
 
     this.mapHandler = this.mapHandler.bind(this);
     this.submitStateName = this.submitStateName.bind(this);
+    this.submitStateStats = this.submitStateStats.bind(this);
   }
 
   componentDidMount() {
@@ -96,7 +99,7 @@ export default class MapUS extends React.Component {
     var statename = new Promise(function(resolve, reject) {
       resolve(event.target.dataset.name)
     })
-    statename.then(this.updateCurrentState).then(this.submitStateName)
+    statename.then(this.updateCurrentState).then(this.submitStateName).then(this.submitStateStats)
   }
 
   updateCurrentState = (statename) => {
@@ -138,6 +141,27 @@ export default class MapUS extends React.Component {
       console.log(this.state.winery)
     });
   }
+
+  submitStateStats() {
+    fetch("http://localhost:8081/mapstats/" + this.state.selectedState,
+    {
+      method: "GET"
+    }).then(res => {
+      return res.json();
+    }, err => {
+      console.log(err);
+    }).then(decList => {
+      console.log(decList); //displays your JSON object in the console
+      let decDivs = decList.map((dec, i) => 
+        <StatsRow first={dec.NWINERIES} second={dec.NWINES} third={dec.VARIETY} fourth={dec.NBREWERIES} fifth={dec.NBEERS} sixth={dec.BEER_STYLE}/>
+      );
+
+      this.setState({
+        stats: decDivs
+      });
+      console.log(this.state.stats)
+    });
+  }
  
   render() {
     return (
@@ -148,7 +172,7 @@ export default class MapUS extends React.Component {
             <div className="jumbotron">
               <div className="h1" align="center">{this.state.selectedState}
               </div>
-              <div className="years-container">
+              <div className="years-container" align="center">
                 <USAMap customize={this.state.stateFill} onClick={this.mapHandler} s/>
               </div>
             </div>
@@ -170,6 +194,22 @@ export default class MapUS extends React.Component {
                 </div>
                 <div className="movies-container" id="results">
                   {this.state.winery}
+                </div>
+              </div>
+            </div>
+            <div className="jumbotron">
+              <div className="h3" align="center">Statistics About Beverage Industry in State</div>
+              <div className="movies-container" >
+                <div className="movie">
+                  <div className="header"><strong>Wineries</strong></div>
+                  <div className="header"><strong>Wines Produced</strong></div>
+                  <div className="header"><strong>Most Popular Variety</strong></div>
+                  <div className="header"><strong>Breweries</strong></div>
+                  <div className="header"><strong>Beers Produced</strong></div>
+                  <div className="header"><strong>Most Popular Beer Style</strong></div>
+                </div>
+                <div className="movies-container" id="movieResults">
+                  {this.state.stats}
                 </div>
               </div>
             </div>
