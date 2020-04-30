@@ -1,4 +1,5 @@
 import React from 'react';
+import '../style/PageNavBar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class PageNavbar extends React.Component {
@@ -29,8 +30,8 @@ export default class PageNavbar extends React.Component {
 
 	render() {
 		return (
-			<div className="PageNavbar">
-				<nav className="navbar navbar-expand-lg navbar-light bg-light">
+			<div className="navTitle">
+				<nav className="navbar navbar-expand-lg navbar-dark">
 			      <span className="navbar-brand center">Food-Drink Pairer</span>
 			      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 			        <div className="navbar-nav">
