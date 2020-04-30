@@ -25,6 +25,10 @@
   flex-grow: 4;
 }
 
+.movieResults .mapStats {
+  flex: 1 5 5%;
+}
+
 .movieResults .foodRec, .headers .recHeader {
   flex: 1 0 25%;
   height: 40px;
