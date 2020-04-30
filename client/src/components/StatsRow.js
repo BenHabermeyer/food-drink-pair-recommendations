@@ -1,4 +1,5 @@
 import React from 'react';
+import '../style/BestGenres.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class StatsRow extends React.Component {
@@ -9,12 +10,12 @@ export default class StatsRow extends React.Component {
 	render() {
 		return (
 			<div className="movieResults">
-				<div className="genre">{this.props.first}</div>
-				<div className="movie">{this.props.second}</div>
-				<div className="genre">{this.props.third}</div>
-				<div className="movie">{this.props.fourth}</div>
-				<div className="genre">{this.props.fifth}</div>
-				<div className="movie">{this.props.sixth}</div>
+				<div className="mapStats">{this.props.first}</div>
+				<div className="mapStats">{this.props.second}</div>
+				<div className="mapStats">{this.props.third}</div>
+				<div className="mapStats">{this.props.fourth}</div>
+				<div className="mapStats">{this.props.fifth}</div>
+				<div className="mapStats">{this.props.sixth}</div>
 			</div>
 		);
 	}
