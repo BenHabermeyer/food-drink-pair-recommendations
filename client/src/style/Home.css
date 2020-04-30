@@ -19,13 +19,21 @@
   background-color: #ddd;
 }
 
-.movies-container {
+.home-container {
   display: flex;
+  flex-flow: column wrap;
   padding: 10px;
   margin: 30px 0;
   background-color: rgb(235, 150, 52);
-  font-family:  "Lucida Console", Courier, monospace;
+  font-family:  Palatino, URW Palladio L, serif;
   box-sizing: border-box;
+}
+
+.movies-container .movies-header, .results-container .movie {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 40px;
 }
 
 .genres-container .movies-header, .results-container .movie {
@@ -37,9 +45,19 @@
   font-weight: 900;
 }
 
+.headerHome {
+  margin-left: 10px;
+  font-family:  Snell Roundhand, cursive;
+  font-size: 70px;
+  text-align: center;
+  font-weight: 700;
+}
+
 .title {
-  font-family:  "Lucida Console", Courier, monospace;
-  font-size: 60px;
+  margin-left: 10px;
+  font-family:  Palatino, URW Palladio L, serif;
+  font-size: 55px;
+  font-weight:700;
 }
 
 .text-container {
@@ -66,6 +84,8 @@
   font-weight: 900;
   flex: 1 0 50%;
 }
+
+
 
 .movies-header .header, .movie .rating, .movie .votes {
   flex: 1 0 25%;
