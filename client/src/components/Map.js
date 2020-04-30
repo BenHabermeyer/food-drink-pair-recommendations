@@ -208,12 +208,12 @@ export default class MapUS extends React.Component {
               <div className="h3" align="center">Statistics About Beverage Industry in State</div>
               <div className="movies-container">
                 <div className="movie">
-                  <div className="header"><strong>Wineries</strong></div>
-                  <div className="header"><strong>Wines Produced</strong></div>
-                  <div className="header"><strong>Most Popular Variety</strong></div>
-                  <div className="header"><strong>Breweries</strong></div>
-                  <div className="header"><strong>Beers Produced</strong></div>
-                  <div className="header"><strong>Most Popular Beer Style</strong></div>
+                  <div className="mapStatsHeader"><strong>Wineries</strong></div>
+                  <div className="mapStatsHeader"><strong>Wines Produced</strong></div>
+                  <div className="mapStatsHeader"><strong>Most Popular Variety</strong></div>
+                  <div className="mapStatsHeader"><strong>Breweries</strong></div>
+                  <div className="mapStatsHeader"><strong>Beers Produced</strong></div>
+                  <div className="mapStatsHeader"><strong>Most Popular Beer Style</strong></div>
                 </div>
                 <div className="movies-container" id="movieResults">
                   {this.state.stats}
