@@ -6,6 +6,7 @@ import GenreButton from './GenreButton';
 import DashboardMovieRow from './DashboardMovieRow';
 import winery from '../images/winery.jpg'
 import food_wine from '../images/food_wine.png'
+import wine_shelf from '../images/wine_shelf.jpeg'
 
 
 export default class Home extends React.Component {
@@ -23,7 +24,7 @@ export default class Home extends React.Component {
   // React function that is called when the page load.
   componentDidMount() {
     // Send an HTTP request to the server.
-    fetch("http://localhost:8081/genres",
+    fetch("http://localhost:8081/home",
     {
       method: 'GET' // The type of HTTP request.
     }).then(res => {
@@ -68,52 +69,38 @@ export default class Home extends React.Component {
 
         <br></br>
         <div className="container movies-container">
-          <div className="jumbotron">
-            <div className="display-3">Welcome to Food-Drink Pairer!</div>
-            <div className="lead">
-              This application is a one-stop-shop for you to find the perfect pairing for your individual needs. With information on beer types and quality, wine types and quality, breweries, wineries, price, food pairings and their ratings, this application will allow the user to search for the perfect accompaniment for their meal. 
+          <div className="title">Welcome to Food-Drink Pairer!</div>
+          <div className="text-container">
+            <div className="text">This application is a one-stop-shop for you to find the perfect pairing for your individual needs. With information on beer types and quality, wine types and quality, breweries, wineries, price, food pairings and their ratings, this application will allow the user to search for the perfect accompaniment for their meal. 
             </div>
           </div>
-
           <br></br>
-          <div className="jumbotron">
-            <div className="genres-container">
-              <div className="movies-header">
-                <div className="header-lg"><strong>Source</strong></div>
-                <div className="lead">
-                  Get to know where your wine/beer comes from!
-                </div>                
-              </div>
-            </div>
+          <div className="title"><strong>Info</strong></div>
+          <div className="text-container">
+            <div className="text"> Get to know where your wine/beer comes from!</div>
           </div>
+          <br></br>
           <img className="resize" src={winery} alt="winery"/>
-
+          
           <br></br>
-          <div className="jumbotron">
-            <div className="genres-container">
-              <div className="movies-header">
-                <div className="header-lg"><strong>Pair</strong></div>
-                <div className="lead">
-                  Find out what the best food are for your drink and what the best drink are for your food for the optimal dining experience!
-                </div>
-              </div>
+          <div className="title"><strong>Pair</strong></div>
+          <div className="text-container">
+            <div className="text"> Find out what the best food are for your drink and what the best drink are for your food for the optimal dining experience!
             </div>
           </div>
+          <br></br>
           <img className="resize" src={food_wine} alt="food and wine"/>
           <br></br>
-          <div className="jumbotron">
-            <div className="genres-container">
-              <div className="movies-header">
-                <div className="header-lg"><strong>Map</strong></div>
-                <div className="lead">
-                  Do you prefer your beer/wine from a specific location? This is where you can find other similar drink or find new ones!
-                </div>
-              </div>
-            </div>
+          <div className="title"><strong>Map</strong></div>
+          <div className="text-container">
+            <div className="text"> Find out where the different wineries and breweries are located in the US and try out their best offering!</div>
           </div>
-
+          <br></br>
+          <img className="resize" src={wine_shelf} alt="shelf of wine"/>
+          <br></br>
         </div>
       </div>
+
     );
   }
 }
