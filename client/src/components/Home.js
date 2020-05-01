@@ -74,13 +74,7 @@ export default class Home extends React.Component {
             <div className="text">This application is a one-stop-shop for you to find the perfect pairing for your individual needs. With information on beer types and quality, wine types and quality, breweries, wineries, price, food pairings and their ratings, this application will allow the user to search for the perfect accompaniment for their meal. 
             </div>
           </div>
-          <br></br>
-          <div className="title">Info</div>
-          <div className="text-container">
-            <div className="text"> Get to know where your wine/beer comes from!</div>
-          </div>
-          <br></br>
-          <img className="resize" src={winery} alt="winery"/>
+          
           
           <br></br>
           <div className="title">Pair</div>
@@ -90,6 +84,15 @@ export default class Home extends React.Component {
           </div>
           <br></br>
           <img className="resize" src={food_wine} alt="food and wine"/>
+
+          <br></br>
+          <div className="title">Info</div>
+          <div className="text-container">
+            <div className="text"> Get to know where your wine/beer comes from!</div>
+          </div>
+          <br></br>
+          <img className="resize" src={winery} alt="winery"/>
+
           <br></br>
           <div className="title">Map</div>
           <div className="text-container">
