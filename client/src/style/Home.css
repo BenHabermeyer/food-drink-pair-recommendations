@@ -48,7 +48,7 @@
 .headerHome {
   margin-left: 10px;
   font-family:  Snell Roundhand, cursive;
-  font-size: 70px;
+  font-size: 80px;
   text-align: center;
   font-weight: 700;
 }
@@ -56,8 +56,9 @@
 .title {
   margin-left: 10px;
   font-family:  Palatino, URW Palladio L, serif;
-  font-size: 55px;
-  font-weight:700;
+  font-size: 65px;
+  font-weight:530;
+  text-align: center;
 }
 
 .text-container {
@@ -66,7 +67,7 @@
   padding: 20px;
   cursor: pointer;
   box-sizing: border-box;
-
+  text-align: center;
 }
 
 
@@ -75,7 +76,6 @@
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  margin-left: 10px;
 }
 
 
