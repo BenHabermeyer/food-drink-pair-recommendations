@@ -104,16 +104,18 @@ export default class Pair extends React.Component {
 			<div className="Pair">
 				<PageNavbar active="pair" />
 
-			    <div className="container pair-container">
-			    	<div className="jumbotron">
-			    		<div className="display-3">Pair Your Food</div>
+			    <div className="container pairOuter-container">
+			    	<div className="pair-container">
+			    		<div className="pair-title">Pair Your Food</div>
 			    		<br></br>
 			    		<div className="input-container">
 			    			<input type='text' placeholder="Enter Food Name" value={this.state.foodName} onChange={this.handlefoodNameChange} id="foodName" className="movie-input"/>
 			    			<button id="submitFoodBtn" className="submit-btn" onClick={this.submitFood}>Submit</button>
 			    		</div>
+			    		<br></br>
 			    		<div className="header-container">
-			    			<div className="h6">You may enjoy your food with...</div>
+			    			<div className="text">You may enjoy your food with...</div>
+			    			<br></br>
 			    			<div className="headers">
 			    				<div className="typeHeader"><strong>Type</strong></div>
 			    				<div className="nameHeader"><strong>Best of Its Kind</strong></div>
@@ -125,16 +127,18 @@ export default class Pair extends React.Component {
 			    			{this.state.recDrinkPairs}
 			    		</div>
 			    	</div>
-
-			    	<div className="jumbotron">
-			    		<div className="display-3">Pair Your Drink</div>
+			    	<br></br>
+			    	<div className="pair-container">
+			    		<div className="pair-title">Pair Your Drink</div>
 			    		<br></br>
 			    		<div className="input-container">
 			    			<input type='text' placeholder="Enter Drink Type" value={this.state.drinkType} onChange={this.handledrinkTypeChange} id="drinkType" className="movie-input"/>
 			    			<button id="submitDrinkBtn" className="submit-btn" onClick={this.submitDrink}>Submit</button>
 			    		</div>
+			    		<br></br>
 			    		<div className="header-container">
-			    			<div className="h6">You may enjoy your drink with...</div>
+			    			<div className="text">You may enjoy your drink with...</div>
+			    			<br></br>
 			    			<div className="headers">
 			    				<div className="recHeader"><strong>Food</strong></div>
 			    				<div className="recHeader"><strong>Pair Rating</strong></div>
