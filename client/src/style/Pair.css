@@ -1,11 +1,52 @@
 .header-container, .results-container {
+  background-color: rgb(235, 174, 52);
   display: flex;
   flex-flow: column wrap;
   align-items: stretch;
+  font-family:  Palatino, URW Palladio L, serif;
   /* margin-top: 10px; */
 }
 
+.input-container, .submit-btn {
+  font-family:  Palatino, URW Palladio L, serif;
+  font-size: 18px;
+}
+
+.submit-btn {
+  background-color: rgb(235, 131, 52);
+  outline-color: rgb(235, 131, 52);
+  color: white;
+}
+
+.pairOuter-container {
+  padding: 30px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: stretch;
+}
+
+.pair-container {
+  background-color: rgb(235, 174, 52);
+  padding: 30px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.pair-title {
+  margin-left: 5px;
+  font-family: Palatino, URW Palladio L, serif;
+  font-size: 70px;
+  font-weight: 500;
+}
+
+.header-container .text {
+  font-size: 30px;
+  font-style: italic;
+}
+
+
 .header-container .headers, .results-container .movieResults {
+  font-size: 20px;
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
