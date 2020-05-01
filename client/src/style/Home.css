@@ -22,8 +22,8 @@
 .home-container {
   display: flex;
   flex-flow: column wrap;
-  padding: 10px;
-  margin: 30px 0;
+  padding: 30px;
+  margin: 30px;
   background-color: rgb(235, 150, 52);
   font-family:  Palatino, URW Palladio L, serif;
   box-sizing: border-box;
