@@ -88,7 +88,7 @@ export default class Home extends React.Component {
           <br></br>
           <div className="title">Info</div>
           <div className="text-container">
-            <div className="text"> Get to know more about different kinds of wine and beers such as their rating, price and origin!</div>
+            <div className="text"> Get to know more about different kinds of wines and beers such as their rating, price and origin!</div>
           </div>
           <br></br>
           <img className="resize" src={winery} alt="winery"/>
