@@ -1,14 +1,68 @@
-.header-container, .results-container {
+/* DON"T DELETE */
+.infoHeader-container, .infoResults-container {
+  display: flex;
+  flex-flow: column wrap;
+  flex-flow: column wrap;
+  align-items: stretch;
+  font-family:  Palatino, URW Palladio L, serif;
+}
+
+.infoOuter-container {
+  padding: 30px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: stretch;
+}
+
+.info-container {
+  background-color: rgb(235, 174, 52);
+  padding: 30px;
   display: flex;
   flex-flow: column wrap;
 }
 
-.header-container .headers, .results-container .movieResults {
+.info-title {
+  margin-left: 5px;
+  font-family: Palatino, URW Palladio L, serif;
+  font-size: 70px;
+  font-weight: 500;
+}
+
+.infoHeader-container .infoHeaders, .infoResults-container .infoResults {
+  font-size: 20px;
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
-  height: 40px;
-    padding: 0 25px;
+  align-items: flex-start;
+  max-height: 80px;
+}
+
+.infoHeader-container .text {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.infoHeaders .wineHeader, .infoResults .wine {
+  flex: 1 0 25%;
+  flex-grow: 5;
+}
+.infoHeaders .header, .infoResults .winery {
+	flex: 1 0 15%;
+	flex-shrink: 3;
+}
+
+.infoHeaders .rateHeader, .infoResults .rating {
+	flex: 1 0 15%;
+	text-align: center;
+}
+
+
+
+/* CAN DELETE FROM HERE ON*/
+.header-container .headers {
+  font-size: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  max-height: 80px;
 }
 
 .movieResults .title, .movieResults .id, .movieResults .rating, .movieResults .votes, .headers .header {
