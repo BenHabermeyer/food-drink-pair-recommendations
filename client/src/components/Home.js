@@ -12,52 +12,6 @@ import wine_shelf from '../images/wine_shelf.jpeg'
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-
-    // The state maintained by this React Component. This component maintains the list of genres,
-    // and a list of movies for a specified genre.
-    this.state = {
-    }
-
-
-  }
-
-  // React function that is called when the page load.
-  componentDidMount() {
-    // Send an HTTP request to the server.
-    fetch("http://localhost:8081/home",
-    {
-      method: 'GET' // The type of HTTP request.
-    }).then(res => {
-      // Convert the response data to a JSON.
-      return res.json();
-    }, err => {
-      // Print the error if there is one.
-      console.log(err);
-    }).then(genreList => {
-      if (!genreList) return;
-      // Map each genreObj in genreList to an HTML element:
-      // A button which triggers the showMovies function for each genre.
-      let genreDivs = genreList.map((genreObj, i) =>
-      <GenreButton id={"button-" + genreObj.genre} onClick={() => this.showMovies(genreObj.genre)} genre={genreObj.genre} />
-      );
-
-      
-
-      // Set the state of the genres list to the value returned by the HTTP response from the server.
-      this.setState({
-        genres: genreDivs
-      });
-    }, err => {
-      // Print the error if there is one.
-      console.log(err);
-    });
-  }
-
-
-  /* ---- Q1b (Dashboard) ---- */
-  /* Set this.state.movies to a list of <DashboardMovieRow />'s. */
-  showMovies(genre) {
-  
   }
 
 
@@ -79,7 +33,7 @@ export default class Home extends React.Component {
           <br></br>
           <div className="title">Pair</div>
           <div className="text-container">
-            <div className="text"> Find out what the best food are for your drink and what the best drink are for your food for the optimal dining experience!
+            <div className="text"> Get to know what the best food are for your drink and what the best drink are for your food for the optimal dining experience!
             </div>
           </div>
           <br></br>
@@ -88,7 +42,7 @@ export default class Home extends React.Component {
           <br></br>
           <div className="title">Info</div>
           <div className="text-container">
-            <div className="text"> Get to know more about different kinds of wines and beers such as their rating, price and origin!</div>
+            <div className="text"> Trying to buy wine on a budget? Find the best rated wines around your budget here and get to know which wineries they are from!</div>
           </div>
           <br></br>
           <img className="resize" src={winery} alt="winery"/>
