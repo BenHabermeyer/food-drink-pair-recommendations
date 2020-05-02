@@ -119,8 +119,8 @@ export default class Pair extends React.Component {
 			    			<div className="headers">
 			    				<div className="typeHeader"><strong>Type</strong></div>
 			    				<div className="nameHeader"><strong>Best of Its Kind</strong></div>
-			    				<div className="header"><strong>Pair Rating</strong></div>
-					            <div className="header"><strong>Drink Rating</strong></div>
+			    				<div className="headerRate"><strong>Pair Rating</strong></div>
+					            <div className="headerRate"><strong>Drink Rating</strong></div>
 			    			</div>
 			    		</div>
 			    		<div className="results-container" id="results">
@@ -141,7 +141,7 @@ export default class Pair extends React.Component {
 			    			<br></br>
 			    			<div className="headers">
 			    				<div className="recHeader"><strong>Food</strong></div>
-			    				<div className="recHeader"><strong>Pair Rating</strong></div>
+			    				<div className="recRateHeader"><strong>Pair Rating</strong></div>
 			    			</div>
 			    		</div>
 			    		<div className="results-container" id="results">
