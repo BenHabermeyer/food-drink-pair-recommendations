@@ -1,6 +1,6 @@
 import React from 'react';
 import PageNavbar from './PageNavbar';
-import DashboardMovieRow from './DashboardMovieRow';
+import InfoRow from './InfoRow';
 import '../style/Info.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -75,7 +75,7 @@ export default class Info extends React.Component {
 			 // Map each movieObj in movieList to an HTML element:
 			 // A button which triggers the showMovies function for each genre.
 			 let wineDivs = wineList.map((wineObj, i) =>
-			 <DashboardMovieRow key = {i} WINE = {wineObj.WINE} WINERY = {wineObj.WINERY} AVG_RATING = {wineObj.AVG_RATING}/>
+			 <InfoRow key = {i} WINE = {wineObj.WINE} WINERY = {wineObj.WINERY} AVG_RATING = {wineObj.AVG_RATING}/>
 				 );
 
 			 // Set the state of the genres list to the value returned by the HTTP response from the server.
@@ -94,11 +94,11 @@ export default class Info extends React.Component {
 			<div className="Info">
 				<PageNavbar active="info" />
 
-				<div className="container source-container">
-			      <div className="jumbotron">
-			        <div className="h5">Wine Price</div>
+				<div className="container infoOuter-container">
+			      <div className="info-container">
+			        <div className="info-title">Wine Price</div>
 
-			        <div className="years-container">
+			        <div className="input-container">
 			          <div className="dropdown-container">
 			            <select value={this.state.selectedPrice} onChange={this.handleChange} className="dropdown" id="priceDropdown">
 			            	{this.state.prices}
@@ -107,14 +107,16 @@ export default class Info extends React.Component {
 			          </div>
 			        </div>
 			      </div>
-			      <div className="jumbotron">
-			        <div className="header-container">
-			    			<div className="headers">
-			            <div className="header"><strong>Wine</strong></div>
+			      <div className="info-container">
+			        <div className="infoHeader-container">
+			        	<div className="text">Some of the best wines around your budget...</div>
+			        	<br></br>
+			    			<div className="infoHeaders">
+			            <div className="wineHeader"><strong>Wine</strong></div>
 									<div className="header"><strong>Winery</strong></div>
-			            <div className="header"><strong>Average Rating</strong></div>
+			            <div className="rateHeader"><strong>Average Rating</strong></div>
 			          </div>
-			          <div className="results-container" id="results">
+			          <div className="infoResults-container" id="results">
 			            {this.state.wines}
 			          </div>
 			        </div>
