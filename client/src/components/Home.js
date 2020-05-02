@@ -2,8 +2,7 @@ import React from 'react';
 import '../style/Home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PageNavbar from './PageNavbar';
-import GenreButton from './GenreButton';
-import DashboardMovieRow from './DashboardMovieRow';
+
 import winery from '../images/winery.jpg'
 import food_wine from '../images/food_wine.png'
 import wine_shelf from '../images/wine_shelf.jpeg'
