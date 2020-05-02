@@ -5,3 +5,12 @@ path:hover {
   opacity: 0.50;
   cursor: pointer;
 }
+
+.movieResults .mapStats {
+  flex: 1 5 5%;
+}
+
+.movieResults .foodRec, .headers .recHeader {
+  flex: 1 0 25%;
+  height: 40px;
+}
