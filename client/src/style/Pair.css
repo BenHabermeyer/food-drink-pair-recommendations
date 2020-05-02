@@ -1,23 +1,26 @@
+/* DON'T DELETE*/
 .header-container, .results-container {
   background-color: rgb(235, 174, 52);
   display: flex;
   flex-flow: column wrap;
   align-items: stretch;
   font-family:  Palatino, URW Palladio L, serif;
-  /* margin-top: 10px; */
 }
 
+/* DON'T DELETE*/
 .input-container, .submit-btn {
   font-family:  Palatino, URW Palladio L, serif;
   font-size: 18px;
 }
 
+/* DON'T DELETE*/
 .submit-btn {
   background-color: rgb(235, 131, 52);
   outline-color: rgb(235, 131, 52);
   color: white;
 }
 
+/* DON'T DELETE*/
 .pairOuter-container {
   padding: 30px;
   display: flex;
@@ -25,6 +28,7 @@
   align-items: stretch;
 }
 
+/* DON'T DELETE*/
 .pair-container {
   background-color: rgb(235, 174, 52);
   padding: 30px;
@@ -32,6 +36,7 @@
   flex-flow: column wrap;
 }
 
+/* DON'T DELETE*/
 .pair-title {
   margin-left: 5px;
   font-family: Palatino, URW Palladio L, serif;
@@ -39,38 +44,57 @@
   font-weight: 500;
 }
 
+/* DON'T DELETE*/
 .header-container .text {
   font-size: 30px;
   font-style: italic;
 }
 
-
-.header-container .headers, .results-container .movieResults {
+/* DON'T DELETE (delete movieResults) */
+.header-container .headers, .results-container .pairResults, .results-container .movieResults {
   font-size: 20px;
   display: flex;
   flex-flow: row nowrap;
-  align-items: stretch;
+  align-items: flex-start;
   max-height: 80px;
 }
 
-.movieResults .drink_rating, .movieResults .rating, .movieResults .pair_rating, .headers .header {
+.results-container .foodResults {
+  font-size: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  max-height: 40px;
+}
+
+/* DON'T DELETE*/
+.pairResults .drink_rating, .pairResults .rating, .pairResults .pair_rating, .foodResults .foodRate, .headers .headerRate, .headers .recRateHeader {
   flex: 1 0 8%;
+  text-align: center;
 }
 
-.movieResults .type, .headers .typeHeader {
+/* DON'T DELETE*/
+.pairResults .type, .headers .typeHeader, .foodResults .foodRec, .headers .recHeader {
   flex: 1 0 15%;
+  text-align: left;
 }
 
-.movieResults .name, .headers .nameHeader {
+/* DON'T DELETE*/
+.pairResults .name, .headers .nameHeader {
   flex: 1 0 25%;
   flex-grow: 4;
 }
 
-.movieResults .mapStats {
-  flex: 1 5 5%;
+/* CAN DELETE FROM HERE ON*/
+.movieResults .drink_rating, .movieResults .rating, .movieResults .pair_rating{
+  flex: 1 0 8%;
 }
 
-.movieResults .foodRec, .headers .recHeader {
+.movieResults .type {
+  flex: 1 0 15%;
+}
+
+.movieResults .name {
   flex: 1 0 25%;
-  height: 40px;
+  flex-grow: 4;
 }
