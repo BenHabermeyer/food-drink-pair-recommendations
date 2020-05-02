@@ -8,9 +8,9 @@ export default class FoodRecRow extends React.Component {
 
 	render() {
 		return (
-			<div className="movieResults">
+			<div className="foodResults">
 				<div className="foodRec">{this.props.food}</div>
-				<div className="foodRec">{this.props.rating}</div>
+				<div className="foodRate">{this.props.rating}</div>
 			</div>
 		);
 	}
