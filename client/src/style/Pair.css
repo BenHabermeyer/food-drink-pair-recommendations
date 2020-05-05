@@ -7,6 +7,7 @@
   font-family:  Palatino, URW Palladio L, serif;
 }
 
+
 /* DON'T DELETE*/
 .input-container, .submit-btn {
   font-family:  Palatino, URW Palladio L, serif;
@@ -59,6 +60,18 @@
   max-height: 80px;
 }
 
+.header-container .statHeaders {
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 20px;
+  align-items: flex-start;
+  text-align: center;
+}
+
+.statHeaders .header {
+  flex: 1 0 8%;
+}
+
 .results-container .foodResults {
   font-size: 20px;
   display: flex;
@@ -85,7 +98,30 @@
   flex-grow: 4;
 }
 
+
 /* CAN DELETE FROM HERE ON*/
+
+.movieResults .mapStats {
+  flex: 1 5 15%;
+  text-align: center;
+}
+
+.movieResults .name {
+  font-size: 20px;
+  flex: 1 0 15%;
+}
+
+.movieResults .rateDrink {
+  font-size: 20px;
+  flex: 1 0 8%;
+  text-align: center;
+}
+
+.movieResults .drink {
+  font-size: 20px;
+  flex: 1 0 25%;
+  flex-grow: 4;
+}
 .movieResults .drink_rating, .movieResults .rating, .movieResults .pair_rating{
   flex: 1 0 8%;
 }
