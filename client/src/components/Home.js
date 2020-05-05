@@ -22,7 +22,7 @@ export default class Home extends React.Component {
 
         <br></br>
         <div className="container home-container">
-          <div className="headerHome">Welcome to Food-Drink Pairer!</div>
+          <div className="headerHome">Welcome to Vino & Cerveza!</div>
           <div className="text-container">
             <div className="text">This application is a one-stop-shop for you to find the perfect pairing for your individual needs. With information on beer types and quality, wine types and quality, breweries, wineries, price, food pairings and their ratings, this application will allow the user to search for the perfect accompaniment for their meal. 
             </div>
