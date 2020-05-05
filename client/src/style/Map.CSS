@@ -6,11 +6,71 @@ path:hover {
   cursor: pointer;
 }
 
+
+
+.mapHeader-container, .mapResults-container {
+  display: flex;
+  flex-flow: column wrap;
+  flex-flow: column wrap;
+  align-items: stretch;
+  font-family:  Palatino, URW Palladio L, serif;
+}
+
+.mapOuter-container {
+  padding: 30px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: stretch;
+}
+
+.map-container {
+  background-color: rgb(235, 150, 52);
+  padding: 30px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.map-title {
+  margin-left: 5px;
+  font-family: Palatino, URW Palladio L, serif;
+  font-size: 70px;
+  font-weight: 500;
+}
+
+.mapHeader-container .mapHeaders, .mapResults-container .mapResults {
+  font-size: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  max-height: 80px;
+}
+
+.mapHeader-container .text {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.mapHeaders .wineHeader, .mapResults .wine {
+  flex: 1 0 25%;
+  flex-grow: 5;
+}
+.mapHeaders .header, .mapResults .winery {
+	flex: 1 0 15%;
+	flex-shrink: 3;
+}
+
+.mapHeaders .rateHeader, .mapResults .rating {
+	flex: 1 0 15%;
+	text-align: center;
+}
+
+
 .movieResults .mapStats {
-  flex: 1 5 5%;
+  flex: 1 5 15%;
 }
 
 .movieResults .foodRec, .headers .recHeader {
   flex: 1 0 25%;
   height: 40px;
 }
+
