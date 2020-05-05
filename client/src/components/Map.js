@@ -175,47 +175,48 @@ export default class MapUS extends React.Component {
       <div className="MapUS">
         <PageNavbar active="map" />
 
-        <div className="container source-container">
-            <div className="jumbotron">
-              <div className="h1" align="center">{this.state.selectedState}
+        <div className="container infoOuter-container">
+            <div className="info-container">
+              <div className="info-title" align="center">{this.state.selectedState}
               </div>
               <div className="years-container" align="center">
                 <USAMap customize={this.state.stateFill} onClick={this.mapHandler} s/>
               </div>
             </div>
-            <div className="jumbotron">
-              <div className="h3" align="center">Top 10 Wineries/Breweries In Your State</div>
+            <div className="pair-container">
+              <div className="pair-title" align="center">Top 10 Wineries/Breweries In Your State</div>
               <RadioGroup onChange={ this.buttonHandler } value={this.state.button} horizontal>
                 <RadioButton value="wine" iconSize={20} iconInnerSize={10}>
-                  Wine
+                  <strong>Wine</strong>
                 </RadioButton>
                 <RadioButton value="beer" iconSize={20} iconInnerSize={10}>
-                  Beer
+                  <strong>Beer</strong>
                 </RadioButton>
               </RadioGroup>
-              <div className="movies-container">
-                <div className="movie">
+              <br></br>
+              <div className="header-container">
+                <div className="headers">
                   <div className="header"><strong>Winery/Brewery Name</strong></div>
                   <div className="header"><strong>Average Wine/Beer Rating</strong></div>
                   <div className="header"><strong>Best Wine/Beer</strong></div>
                 </div>
-                <div className="movies-container" id="results">
+                <div className="results-container" id="results">
                   {this.state.winery}
                 </div>
               </div>
             </div>
-            <div className="jumbotron">
-              <div className="h3" align="center">Statistics About Beverage Industry in State</div>
-              <div className="movies-container">
-                <div className="movie">
-                  <div className="mapStatsHeader"><strong>Wineries</strong></div>
-                  <div className="mapStatsHeader"><strong>Wines Produced</strong></div>
-                  <div className="mapStatsHeader"><strong>Most Popular Variety</strong></div>
-                  <div className="mapStatsHeader"><strong>Breweries</strong></div>
-                  <div className="mapStatsHeader"><strong>Beers Produced</strong></div>
-                  <div className="mapStatsHeader"><strong>Most Popular Beer Style</strong></div>
+            <div className="pair-container">
+              <div className="pair-title" align="center">Statistics About Beverage Industry in State</div>
+              <div className="header-container">
+                <div className="statHeaders">
+                  <div className="header"><strong>Wineries</strong></div>
+                  <div className="header"><strong>Wines Produced</strong></div>
+                  <div className="header"><strong>Most Popular Variety</strong></div>
+                  <div className="header"><strong>Breweries</strong></div>
+                  <div className="header"><strong>Beers Produced</strong></div>
+                  <div className="header"><strong>Most Popular Beer Style</strong></div>
                 </div>
-                <div className="movies-container" id="movieResults">
+                <div className="results-container" id="movieResults">
                   {this.state.stats}
                 </div>
               </div>
