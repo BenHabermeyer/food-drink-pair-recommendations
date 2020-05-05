@@ -311,12 +311,9 @@ async function getPrices(req, res) {
     let result = await connection.execute(
         // select price ranges with increments of $100
       `SELECT DISTINCT (FLOOR(price/10)*10) AS price
-        FROM (
-        SELECT DISTINCT price
         FROM wine_origin
         WHERE price IS NOT NULL
-      )
-      ORDER BY price`,
+        ORDER BY price`,
       [],
       {
         maxRows: 11,
