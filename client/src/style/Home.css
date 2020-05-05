@@ -29,7 +29,9 @@
   box-sizing: border-box;
 }
 
+
 .movies-container .movies-header, .results-container .movie {
+  background-color: rgb(235, 150, 52);
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
